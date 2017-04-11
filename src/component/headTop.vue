@@ -38,22 +38,22 @@
         },
         props: ['signinUp', 'headTitle', 'goBack'],
         computed: {
-            userInfo () {
-                return this.$store.state.userInfo;
-            }
+            ...mapState([
+                'userInfo'
+            ])
         },
         methods: {
-            getUserInfo(){
-                this.$store.dispatch('getUserInfo');
-            }
+            ...mapActions([
+                'getUserInfo'
+            ])
         },
 
     }
 
 </script>
 
-<style lang="sass" scoped>
-    @import '../css/mixin';
+<style lang="scss" scoped>
+    @import '../style/mixin';
 
     #head_top{
         background-color: $blue;

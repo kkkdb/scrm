@@ -9,10 +9,14 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="full-screen" content="yes">
     <meta name="x5-fullscreen" content="true">
-</head>
+<link href="/elm/static/css/app.css" rel="stylesheet"></head>
 <body>
 	<div id="app">
 		<router-view></router-view>
 	</div>
-</body>
+
+	<!-- webpack自动构建生成包 -->
+	<script src="./config/config.js"></script>
+    <script src="./dist/bundle.js"></script>
+<script type="text/javascript" src="/elm/static/js/manifest.js"></script><script type="text/javascript" src="/elm/static/js/vendor.js"></script><script type="text/javascript" src="/elm/static/js/app.js"></script></body>
 </html>

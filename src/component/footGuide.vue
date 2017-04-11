@@ -53,8 +53,8 @@
 	}
 </script>
 
-<style lang="sass" scoped>
-	@import '../css/mixin';
+<style lang="scss" scoped>
+	@import '../style/mixin';
 	.menu{
         background-color: #fff;
         position: fixed;

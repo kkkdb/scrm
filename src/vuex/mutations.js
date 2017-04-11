@@ -1,13 +1,13 @@
 import {
-	GET_USERINFO
+	GET_USERINFO,
+	SET_TITLE,
 } from './mutation-types.js'
 
-const mutations = {
-	GET_USERINFO: (state, info) => {
+export default {
+	[GET_USERINFO](state, info){
 		console.log(info);
+	},
+	[SET_TITLE](state, title){
+		document.title = title;
 	}
-}
-
-export default{
-	mutations
 }

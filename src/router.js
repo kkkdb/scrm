@@ -13,12 +13,15 @@ export default new VueRouter({
             {
                 path: '',
                 redirect: '/home'
-            },
-            {
+            },{
                 name: 'home',
                 path: '/home',
                 component: require('./view/home')                       //首页
-            }
+            },{
+                name: 'login',
+                path: '/login',
+                component: require('./view/login')                      //登录
+            },
             ]
         }, 
         {
