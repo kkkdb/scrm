@@ -1,14 +1,20 @@
 import Vue from 'vue';
-import App from './App.vue';
 import router from './router.js';
-import zepto from 'webpack-zepto'
+import store from './vuex/';
+import './config/rem'
+import zepto from 'webpack-zepto';
+import FastClick from 'fastclick';
 
-// 开启debug模式
-Vue.config.debug = true;
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
 
 new Vue({
-    router: router,
-    render: h => h(App)
+    router,
+    store,
 }).$mount('#app');
 
 window.$ = zepto;
+window.vue = Vue;

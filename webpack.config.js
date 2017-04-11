@@ -4,12 +4,12 @@ var path = require('path'),
 module.exports = {
 	entry: './src/main.js',
 	output: {
-		path: './dist',
+		path: '/dist/',
 		publicPath: '/dist/',
 		filename: 'bundle.js'
 	},
 	module: {
-		loaders: [{
+		rules: [{
 			test: /\.js$/,
 			loader: 'babel-loader',
 			query: {
@@ -25,7 +25,7 @@ module.exports = {
 		]
 	},
 	resolve: {
-		extensions: ['', '.js', '.vue', '.css'],
+		extensions: ['.js', '.vue', '.css', '.scss', '.less'],
 		alias: {
 		    'vue$': 'vue/dist/vue.js'
 	 	}
