@@ -1,9 +1,7 @@
 <template>
-	<div>
-		<transition name="router-fade" mode="out-in">
-    		<router-view></router-view>
-    	</transition>
-    </div>
+	<transition name="router-fade" mode="out-in">
+		<router-view></router-view>
+	</transition>
 </template>
 
 <script>
@@ -21,5 +19,9 @@
 	}
 	.router-fade-enter, .router-fade-leave-active {
 	  	opacity: 0;
+	}
+	#app{
+		width: 100%;
+		height: 100%;
 	}
 </style>

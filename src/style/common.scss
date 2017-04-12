@@ -11,6 +11,7 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
   font-family: "Microsoft Yahei",sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
+  font-size: 0.512rem;
 }
 body:focus, div:focus, span:focus, header:focus, footer:focus, nav:focus, section:focus, aside:focus, article:focus, ul:focus, dl:focus, dt:focus, dd:focus, li:focus, a:focus, p:focus, h1:focus, h2:focus, h3:focus, h4:focus, h5:focus, h6:focus, i:focus, b:focus, textarea:focus, button:focus, input:focus, select:focus, figure:focus, figcaption:focus {
     outline: none;
@@ -88,4 +89,31 @@ html, body {
 }
 .router-fade-enter, .router-fade-leave-active {
   opacity: 0;
+}
+
+.btn-primary {
+  width: 3.584rem;
+  height: 1.5rem;
+  background-color: #ea68a2;
+  color: #fff;
+  font-size: 0.6rem;
+  border-radius: 4px;
+}
+.btn-default {
+  width: 3.584rem;
+  height: 1.5rem;
+  background-color: #d2d2d2;
+  color: #f2f2f2;
+  font-size: 0.6rem;
+  border-radius: 4px;
+  opacity: 0.7;
+}
+.btn-sm {
+  width: 2.219rem !important;
+  height: 1.066rem !important;
+  font-size: 0.555rem;
+}
+.btn-block {
+  width: 100% !important;
+  height: 1.7rem !important;
 }

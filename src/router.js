@@ -21,6 +21,10 @@ export default new VueRouter({
                 name: 'login',
                 path: '/login',
                 component: require('./view/login')                      //登录
+            },{
+                name: 'userCenter',
+                path: '/userCenter',
+                component: require('./view/userCenter')                 //会员中心
             },
             ]
         }, 
