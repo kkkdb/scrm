@@ -9,7 +9,7 @@
 					<ul>
 						<li>
 							<p class="p1">积分</p>
-							<p class="p2">2,000</p>
+							<p class="p2" v-text='price'></p>
 						</li>
 						<li>
 							<p class="p1">会员等级</p>
@@ -24,26 +24,26 @@
 			</div>
 			<div class="bototmBox">
 				<ul>
-					<li>
+					<router-link :to="{name: 'vipRule'}" tag='li'>
 						<img src="../images/vip.png" alt="会员制度">
 						<p>会员制度</p>
-					</li>
+					</router-link>
 					<li>
 						<img src="../images/gift.png" alt="积分兑礼">
 						<p>积分兑礼</p>
 					</li>
-					<li>
+					<router-link :to="{name: 'rights'}" tag='li'>
 						<img src="../images/rights.png" alt="我的权益">
 						<p>我的权益</p>
-					</li>
+					</router-link>
 					<li>
 						<img src="../images/trial.png" alt="试用申请">
 						<p>试用申请</p>
 					</li>
-					<li>
+					<router-link :to="{name: 'userInfo'}" tag='li'>
 						<img src="../images/user.png" alt="完善资料">
 						<p>完善资料</p>
-					</li>
+					</router-link>
 					<li>
 						<img src="../images/calendar.png" alt="每日签到">
 						<p>每日签到</p>
@@ -71,14 +71,20 @@
 	export default{
 		mounted() {
 			this.SET_TITLE('会员中心');
+			this.SET_PRICE_NUM(2000);
 		},
 		data() {
 			return{
-				
+
 			}
 		},
+		computed: {
+            ...mapState([
+                'price'
+            ]),
+        },
 		methods: {
-			...mapMutations(['SET_TITLE']),
+			...mapMutations(['SET_TITLE','SET_PRICE_NUM']),
 
 		}
 	}

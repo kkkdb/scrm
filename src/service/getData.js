@@ -28,8 +28,8 @@ import fetch from '../config/fetch'
 
 	let mobileRegion = () => {
 		return {
-			code: 502,
-			message: '验证码有误',
+			code: 0,
+			message: '',
 		}
 	}
 

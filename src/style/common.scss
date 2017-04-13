@@ -11,11 +11,12 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
   font-family: "Microsoft Yahei",sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
-  font-size: 0.512rem;
 }
 body:focus, div:focus, span:focus, header:focus, footer:focus, nav:focus, section:focus, aside:focus, article:focus, ul:focus, dl:focus, dt:focus, dd:focus, li:focus, a:focus, p:focus, h1:focus, h2:focus, h3:focus, h4:focus, h5:focus, h6:focus, i:focus, b:focus, textarea:focus, button:focus, input:focus, select:focus, figure:focus, figcaption:focus {
     outline: none;
 }
+
+* { touch-action: none; } 
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar {
@@ -116,4 +117,10 @@ html, body {
 .btn-block {
   width: 100% !important;
   height: 1.7rem !important;
+}
+.text-note{
+  color: #999999;
+}
+.text-pink{
+  color: #ea68a2;
 }

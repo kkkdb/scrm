@@ -7,7 +7,8 @@ import actions from './action'
 Vue.use(Vuex)
 
 const state = {
-	userInfo: null
+	userInfo: null,
+	price: null
 }
 
 export default new Vuex.Store({

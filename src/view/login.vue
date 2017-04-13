@@ -35,23 +35,19 @@
 				</div>
 			</div>
 		</div>
-		<alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
 	</div>
 </template>
 
 <script>
 	import {mapState, mapMutations} from 'vuex'
-	import alertTip from '../component/common/alertTip'
 	import {mobileCode, mobileRegion} from '../service/getData'
 	export default{
 		data () {
 			return {
-				showAlert: false, //显示提示组件
-                alertText: '', //提示的内容
                 timer: '', //倒计时定时器
 
 				sex: 'famale',
-				agree: false,
+				agree: true,
 				phone_number: '', //电话号码
 				code: '', //短信验证码
 				validate_token: '', //获取短信时返回的验证值，登录时需要
@@ -62,9 +58,6 @@
 		},
 		mounted () {
 			this.SET_TITLE('会员绑定');
-		},
-		components:{
-			alertTip
 		},
 		computed: {
             //判断手机号码
@@ -80,7 +73,7 @@
 			//获取短信验证码
             async getVerifyCode(){
                 if (this.rightPhoneNumber) {
-                    this.computedTime = 30;
+                    this.computedTime = 60;
                     this.timer = setInterval(() => {
                         this.computedTime --;
                         if (this.computedTime == 0) {
@@ -90,8 +83,7 @@
                     //发送短信验证码
                     let res = await mobileCode(this.phone_number);
                     if (res.message) {
-                        this.showAlert = true;
-                        this.alertText = res.message;
+                    	$.alert(res.message);
                         return
                     }
                     this.validate_token = res.validate_token;
@@ -100,33 +92,30 @@
             },
             async mobileRegion () {
         		if (!this.rightPhoneNumber) {
-                    this.showAlert = true;
-                    this.alertText = '手机号码不正确';
+        			$.alert('手机号码不正确');
                     return
                 }
                 if(!(/^\d{6}$/gi.test(this.code))){
-                    this.showAlert = true;
-                    this.alertText = '短信验证码不正确';
+                	$.alert('短信验证码不正确');
                     return
                 }
                 if (!this.agree) {
-                	this.showAlert = true;
-                    this.alertText = '请仔细阅读声明并勾选同意';
+                	$.alert('您还没有同意隐私声明');
                     return
                 }
                 //注册会员
                 let res = await mobileRegion(this.phone_number, this.code, this.sex);
                 if (res.message) {
-                    this.showAlert = true;
-                    this.alertText = res.message;
+                	$.alert(res.message);
                     return
                 }
                 this.userInfo = res;
+                let _self = this;
+                $.alert('注册成功',()=>{
+                	_self.$router.push({name: 'userCenter'});
+                });
 
-            },
-			closeTip () {
-				this.showAlert = false;
-			}
+            }
 		}
 	}
 </script>
@@ -186,7 +175,7 @@
 			margin: 0.84rem 0;
 		}
 		.code .inputBox{
-			width: 60%;
+			width: 63%;
 		}
 		.sexSelect{
 			@include wh(100%, 1.1rem);
