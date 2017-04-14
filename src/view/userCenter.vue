@@ -9,7 +9,7 @@
 					<ul>
 						<li>
 							<p class="p1">积分</p>
-							<p class="p2" v-text='price'></p>
+							<p class="p2" v-text='points'></p>
 						</li>
 						<li>
 							<p class="p1">会员等级</p>
@@ -28,18 +28,18 @@
 						<img src="../images/vip.png" alt="会员制度">
 						<p>会员制度</p>
 					</router-link>
-					<li>
+					<router-link :to="{name: 'gift'}" tag='li'>
 						<img src="../images/gift.png" alt="积分兑礼">
 						<p>积分兑礼</p>
-					</li>
+					</router-link>
 					<router-link :to="{name: 'rights'}" tag='li'>
 						<img src="../images/rights.png" alt="我的权益">
 						<p>我的权益</p>
 					</router-link>
-					<li>
+					<router-link :to="{name: 'trial'}" tag='li'>
 						<img src="../images/trial.png" alt="试用申请">
 						<p>试用申请</p>
-					</li>
+					</router-link>
 					<router-link :to="{name: 'userInfo'}" tag='li'>
 						<img src="../images/user.png" alt="完善资料">
 						<p>完善资料</p>
@@ -52,14 +52,14 @@
 						<img src="../images/kefu.png" alt="专属客服">
 						<p>专属客服</p>
 					</li>
-					<li>
-						<img src="../images/points.png" alt="积分记录">
+					<router-link :to="{name: 'earnRecord'}" tag='li'>
+						<img src="../images/earnRecord.png" alt="积分记录">
 						<p>积分记录</p>
-					</li>
-					<li>
-						<img src="../images/record.png" alt="兑礼及试用记录">
+					</router-link>
+					<router-link :to="{name: 'usageRecord'}" tag='li'>
+						<img src="../images/usageRecord.png" alt="兑礼及试用记录">
 						<p>兑礼及试用记录</p>
-					</li>
+					</router-link>
 				</ul>
 			</div>
 		</div>
@@ -67,24 +67,20 @@
 </template>
 
 <script>
+	import {setNum} from '../common/common'
 	import {mapState, mapMutations} from 'vuex'
 	export default{
 		mounted() {
 			this.SET_TITLE('会员中心');
-			this.SET_PRICE_NUM(2000);
+			this.points = setNum(2000);
 		},
 		data() {
 			return{
-
+				points: ''
 			}
 		},
-		computed: {
-            ...mapState([
-                'price'
-            ]),
-        },
 		methods: {
-			...mapMutations(['SET_TITLE','SET_PRICE_NUM']),
+			...mapMutations(['SET_TITLE']),
 
 		}
 	}

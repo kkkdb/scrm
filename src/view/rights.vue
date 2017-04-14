@@ -3,7 +3,7 @@
 		<div class="mainBody">
 			<div class="topBox">
 				<img src="../images/yincard.png" alt="银卡会员">
-				<p class='note'>当年还需累积消费<span class='text-pink'>1,000元</span>，即可升级为<span class='text-pink'>金卡会员</span>，享受更多权益</p>
+				<p class='note'>当年还需累积消费<span class='text-pink'>{{points}}元</span>，即可升级为<span class='text-pink'>金卡会员</span>，享受更多权益</p>
 			</div>
 			<div class="bottomBox">
 				<div class="weui-cells">
@@ -35,14 +35,16 @@
 </template>
 
 <script>
+	import {setNum} from '../common/common'
 	import {mapState, mapMutations} from 'vuex'
 	export default{
 		mounted() {
 			this.SET_TITLE('我的权益');
+			this.points = setNum(1000);
 		},
 		data() {
 			return{
-
+				points: null
 			}
 		},
 		methods: {

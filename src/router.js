@@ -12,7 +12,7 @@ export default new VueRouter({
             children: [
             {
                 path: '',
-                redirect: '/home'
+                redirect: '/login'
             },{
                 name: 'home',
                 path: '/home',
@@ -37,12 +37,32 @@ export default new VueRouter({
                 name: 'vipRule',
                 path: '/vipRule',
                 component: require('./view/vipRule')                    //会员制度
+            },{
+                name: 'gift',
+                path: '/gift',
+                component: require('./view/gift')                       //积分兑礼
+            },{
+                name: 'formConfirm',
+                path: '/formConfirm/:type',
+                component: require('./view/formConfirm')                //积分兑礼或者使用申请提交
+            },{
+                name: 'usageRecord',
+                path: '/usageRecord',
+                component: require('./view/usageRecord')                //兑礼及试用记录
+            },{
+                name: 'trial',
+                path: '/trial',
+                component: require('./view/trial')                      //试用申请
+            },{
+                name: 'earnRecord',
+                path: '/earnRecord',
+                component: require('./view/earnRecord')                 //获取积分记录
             },
             ]
         }, 
         {
             path: '*',
-            redirect: '/home'
+            redirect: '/login'
         }
     ]
 })
