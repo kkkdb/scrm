@@ -57,6 +57,10 @@ export default new VueRouter({
                 name: 'earnRecord',
                 path: '/earnRecord',
                 component: require('./view/earnRecord')                 //获取积分记录
+            },{
+                name: 'signBoard',
+                path: '/signBoard',
+                component: require('./view/signBoard')                  //每日签到
             },
             ]
         }, 

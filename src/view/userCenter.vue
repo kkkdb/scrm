@@ -44,10 +44,10 @@
 						<img src="../images/user.png" alt="完善资料">
 						<p>完善资料</p>
 					</router-link>
-					<li>
+					<router-link :to="{name: 'signBoard'}" tag='li'>
 						<img src="../images/calendar.png" alt="每日签到">
 						<p>每日签到</p>
-					</li>
+					</router-link>
 					<li>
 						<img src="../images/kefu.png" alt="专属客服">
 						<p>专属客服</p>
