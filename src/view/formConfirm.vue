@@ -96,7 +96,8 @@
 	import {mapState, mapMutations} from 'vuex'
 	export default{
 		mounted() {
-
+			let title = this.type == 'gift'?'积分兑礼':'试用申请';
+			this.SET_TITLE(title);
 		},
 		data() {
 			return{
@@ -112,7 +113,7 @@
 			}
 		},
 		methods: {
-
+			...mapMutations(['SET_TITLE']),
 		}
 	}
 </script>

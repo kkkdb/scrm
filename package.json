@@ -1,8 +1,8 @@
 {
-  "name": "elm",
+  "name": "weixin_vip",
   "version": "1.0.1",
-  "description": "vue2-elm",
-  "author": "cangdu <1264889788@qq.com>",
+  "description": "微信会员中心",
+  "author": "dbkong",
   "private": true,
   "license": "Apache",
   "scripts": {

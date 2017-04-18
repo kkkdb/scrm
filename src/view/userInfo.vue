@@ -79,7 +79,7 @@
 	    <div class="weui-cells">
 	    	<div class="weui-cell">
 	    		<div class="weui-cell__bd">
-		          	<textarea class="weui-textarea" placeholder="请填写详细地址" rows="3"></textarea>
+		          	<textarea class="weui-textarea" placeholder="请填写详细地址" rows="3" v-model='formData.shipping_address'></textarea>
 		        </div>
 	    	</div>
 	    </div>
@@ -95,7 +95,7 @@
 	    </div>
 	    <div class="weui-cells">
 	    	<div class="weui-cell">
-	    		<button class="btn-primary btn-block">确定</button>
+	    		<button class="btn-primary btn-block" @click='submit'>确定</button>
 	    	</div>
 	    </div>
 	</div>
@@ -123,20 +123,20 @@
 		data() {
 			return{
 				formData: {
-					name: '',
-					sex: 'male',
-					mobile: '',
-					email: '',
-					birthday: '',
-					province_name: '',
+					name: '', //姓名
+					sex: 'male', //性别
+					mobile: '', //手机号码
+					email: '', //邮箱
+					birthday: '', //生日
+					province_name: '', //省
 					province_id: '',
-					city_name: '',
+					city_name: '', //市
 					city_id: '',
-					district_name: '',
+					district_name: '', //区
 					distict_id: '',
-					street: '',
+					street: '', //街道
 				},
-				callWayArr: [{
+				callWayArr: [{ //沟通方式
 					label: '短信',
 					value: 'msg',
 					check: false
@@ -196,6 +196,41 @@
 			showStreetPicker() {
 
 			},
+			submit(){
+				if(this.confirm()){
+
+				}
+			},
+			confirm(){
+				if ($.trim(this.formData.name) == '') {
+					$.alert('请输入姓名');
+					return false;
+				}
+				if (!(/^1\d{10}$/gi.test(this.formData.mobile))) {
+					$.alert('手机号格式有误');
+					return false;
+				}
+				if (!(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(this.formData.email))) {
+					$.alert('邮箱格式有误');
+					return false;
+				}
+				if (this.formData.birthday == '') {
+					$.alert('请选择生日');
+					return false;
+				}
+				if (this.formData.province_name == '') {
+					$.alert('请选择所在地区');
+					return false;
+				}
+				if (this.formData.street == '') {
+					$.alert('请选择街道');
+					return false;
+				}
+				if ($.trim(this.formData.shipping_address) == '') {
+					$.alert('详细地址不得为空');
+					return false;
+				}
+			}
 		}
 	}
 </script>
@@ -232,7 +267,8 @@
 
 		ul li{
 			float: left;
-			width: 50%;
+			width: 25%;
+			margin-right: 25%;
 			margin-bottom: 0.4266rem;
 
 			.check{
