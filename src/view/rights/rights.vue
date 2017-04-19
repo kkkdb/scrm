@@ -2,32 +2,32 @@
 	<div id="userRights">
 		<div class="mainBody">
 			<div class="topBox">
-				<img src="../images/yincard.png" alt="银卡会员">
+				<img src="../../images/yincard.png" alt="银卡会员">
 				<p class='note'>当年还需累积消费<span class='text-pink'>{{points}}元</span>，即可升级为<span class='text-pink'>金卡会员</span>，享受更多权益</p>
 			</div>
 			<div class="bottomBox">
 				<div class="weui-cells">
-			        <div class="weui-cell weui-cell_access">
+			        <router-link class="weui-cell weui-cell_access" :to="{name: 'earnRecord'}" tag='li'>
 			            <div class="weui-cell__hd">
 			                <label class="weui-label">积分记录</label>
 			            </div>
 			            <div class="weui-cell__bd"></div>
 			            <div class="weui-cell__ft"></div>
-			        </div>
-			        <div class="weui-cell weui-cell_access">
+			        </router-link>
+			        <router-link tag='div' :to="{name: 'rightsNote', params:{type: 'birth'}}" class="weui-cell weui-cell_access">
 			            <div class="weui-cell__hd">
 			                <label class="weui-label">生日权益</label>
 			            </div>
 			            <div class="weui-cell__bd text-note">生日当月消费金额1元=2积分</div>
 			            <div class="weui-cell__ft"></div>
-			        </div>
-			        <div class="weui-cell weui-cell_access">
+			        </router-link>
+			        <router-link tag='div' :to="{name: 'rightsNote', params:{type: 'other'}}" class="weui-cell weui-cell_access">
 			            <div class="weui-cell__hd">
 			                <label class="weui-label">其他权益</label>
 			            </div>
 			            <div class="weui-cell__bd"></div>
 			            <div class="weui-cell__ft"></div>
-			        </div>
+			        </router-link>
 			    </div>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-	import {setNum} from '../common/common'
+	import {setNum} from '../../common/common'
 	import {mapState, mapMutations} from 'vuex'
 	export default{
 		mounted() {
@@ -55,11 +55,11 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '../style/mixin';
+	@import '../../style/mixin';
 
 	#userRights{
 		@include wh(100%, 100%);
-		@include bis('../images/bj.png');
+		@include bis('../../images/bj.png');
 	}
 	.mainBody{
 		@include wh(100%, 100%);

@@ -32,7 +32,11 @@ export default new VueRouter({
             },{
                 name: 'rights',
                 path: '/rights',
-                component: require('./view/rights')                     //我的权益
+                component: require('./view/rights/rights')              //我的权益
+            },{
+                name: 'rightsNote',
+                path: '/rightsNote/:type',
+                component: require('./view/rights/rightsNote')          //权益文案
             },{
                 name: 'vipRule',
                 path: '/vipRule',
@@ -60,7 +64,11 @@ export default new VueRouter({
             },{
                 name: 'signBoard',
                 path: '/signBoard',
-                component: require('./view/signBoard')                  //每日签到
+                component: require('./view/sign/signBoard')             //每日签到
+            },{
+                name: 'signNote',
+                path: '/signNote',
+                component: require('./view/sign/signNote')              //每日签到说明
             },
             ]
         }, 

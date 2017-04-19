@@ -5,7 +5,7 @@
 				<div class="calendarBox">
 					<p class='p1'>已连续签到</p>
 					<div class="calendar">
-						<img src="../images/day.png">
+						<img src="../../images/day.png">
 						<div class='dayNum'><span v-text='signNum'></span>天</div>
 					</div>
 					<p class='p2'>
@@ -19,7 +19,7 @@
 					<button class="btn-default" v-if='hasSign'>今日已签到</button>
 					<button class="btn-primary" v-else @click='sign'>签 到</button>
 				</div>
-				<img src="../images/help.png" class='needHelp'>
+				<router-link class='needHelp' :to="{name:'signNote'}"><img src="../../images/help.png"></router-link>
 			</div>
 			<div class="dayList">
 				<ul>
@@ -38,13 +38,13 @@
 			</div>
 		</div>
 		<div class="giftList">
-			<div class="head"><img src="../images/giftHead.png" alt="积分兑礼"></div>
+			<div class="head"><img src="../../images/giftHead.png" alt="积分兑礼"></div>
 			<ul class="list">
 				<li>
 					<div class="item-points"><span>2,000</span> 积分</div>
 					<div class="item-bottom">
 						<div class="left">
-							<img src="../images/1.jpg">
+							<img src="../../images/1.jpg">
 						</div>
 						<div class="right">
 							<p class="name text-pink">帝皇蜂姿修复蜜润柔肤水30ml</p>
@@ -57,7 +57,7 @@
 					<div class="item-points"><span>4,000</span> 积分</div>
 					<div class="item-bottom">
 						<div class="left">
-							<img src="../images/2.jpg">
+							<img src="../../images/2.jpg">
 							<div class="mask">
 								<div class="maskTxt">积分不足</div>
 							</div>
@@ -73,7 +73,7 @@
 					<div class="item-points"><span>8,000</span> 积分</div>
 					<div class="item-bottom">
 						<div class="left">
-							<img src="../images/3.jpg">
+							<img src="../../images/3.jpg">
 							<div class="mask">
 								<div class="maskTxt">积分不足</div>
 							</div>
@@ -89,7 +89,7 @@
 					<div class="item-points"><span>10,000</span> 积分 <i class="text-note">(金卡/白金卡会员专享)</i></div>
 					<div class="item-bottom">
 						<div class="left">
-							<img src="../images/4.jpg">
+							<img src="../../images/4.jpg">
 							<div class="mask">
 								<div class="maskTxt">会员等级不符</div>
 							</div>
@@ -114,7 +114,7 @@
 			let list = [{
 				date: "17",
 				month: "4",
-				hasSign: false,
+				hasSign: true,
 			},{
 				date: "18",
 				month: "4",
@@ -181,7 +181,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '../style/mixin';
+	@import '../../style/mixin';
 
 	#signBoard{
 		width: 100%;
@@ -194,14 +194,17 @@
 
 		.mainContent{
 			@include wh(100%, 73%);
-			@include bis('../images/day-bj.png')
+			@include bis('../../images/day-bj.png')
 			position: relative;
 
-			img.needHelp{
+			.needHelp{
 				@include wh(0.6827rem, 0.6827rem);
 				position: absolute;
 				top: 0.6827rem;
 				right: 0.768rem;
+				img{
+					@include wh(100%, 100%);
+				}
 			}
 			.calendarBox{
 				@include wh(35%, 72%);
