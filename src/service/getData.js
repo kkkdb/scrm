@@ -33,4 +33,12 @@ import fetch from '../config/fetch'
 		}
 	}
 
-export{getUser, mobileCode, mobileRegion}
+	var payRequest = (merchantOrderNo, userId) => fetch('GET', '/payapi/payment/queryOrder', {
+		merchantId: 5,
+		merchantOrderNo,
+		source: 'MOBILE_WAP',
+		userId,
+		version: '1.0.0',
+	});
+
+export{getUser, mobileCode, mobileRegion, payRequest}

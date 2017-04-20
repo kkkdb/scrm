@@ -5,18 +5,20 @@
 		        <div class="swiper-slide">
 		        	<div class="mainBox">
 						<div class="timeline" @click.prevent.stop='changeTime'>
-							{{time}}
+							{{time}} <i class="fa fa-caret-down"></i>
 							<input type="hidden" id='picker' v-model='time'>
 						</div>
 						<div class="line"></div>
 						<div class="pointsBox">
-							<div class='title left'>本月积分</div>
+							<div class='title'>
+								<template v-if='is_now'>本月</template><template v-else>{{month_show}}</template>积分
+							</div>
 				        	<div class='totalPoints'>
-				        		<div class="flex">
-					        		<span class='text-note'>获取：</span> <span class='text-pink'>{{earnPoints}}</span>        			
+				        		<div class="flex" style="border-right: 1px solid #dedede;">
+					        		<span class='text-pink'>{{earnPoints}}</span> 获取积分
 				        		</div>
 				        		<div class="flex">
-					        		<span class='text-note'>使用：</span> {{usePoints}}        			
+				        			<span class='text-pink'>{{usePoints}}</span> 使用积分
 				        		</div>
 				        	</div>
 						</div>
@@ -41,7 +43,6 @@
 				</div>
 		    </div>
 		</div>
-		
 	</div>
 </template>
 
@@ -139,6 +140,13 @@
 			time (){
 				return this.year_show + this.month_show
 			},
+			is_now(){
+				let date = new Date();
+				if(date.getMonth() + 1 == this.month && date.getFullYear() == this.year){
+					return true
+				}
+				return false
+			}
 		},
 		methods: {
 			...mapMutations(['SET_TITLE']),
@@ -221,10 +229,10 @@
 
 		.nav-item{
 			flex: 1;
-			height: 2.133rem;
+			height: 2.134rem;
 			text-align: center;
 			background-color: #fff;
-			line-height: 2.133rem;
+			line-height: 2.134rem;
 
 			&.active{
 				color: $c1;
@@ -233,21 +241,28 @@
 		}
 	}
 	.timeline{
-		font-size: 1rem;
+		font-size: 0.64rem;
+		height: 2.134rem;
+		line-height: 2.134rem;
 		text-align: center;
 	}
 	.pointsBox{
-		height: 1.28rem;
-		line-height: 1.28rem;
+		height: 3.92534rem;
+		text-align: center;
 		.title{
-			font-size: 0.64rem;
-			margin-left: 0.64rem;
+			font-size: 0.5547rem;
+			line-height: 1.75rem;
+			color: $c4;
 		}
 		.totalPoints{
 			display: flex;
 			.flex{
 				flex: 1;
 				text-align: center;
+				font-size: 0.5547rem;
+				span{
+					font-size: 0.8534rem;
+				}
 			}
 		}
 	}
