@@ -1,5 +1,5 @@
 <template>
-	<div id="signNote">
+	<div id="sign-note" class='content bk-white'>
 		<h4 class='title' v-text='title'></h4>
 		<ul v-if='type=="birth"'>
 			<li><span>1.</span>在您的生日当月消费金额1元=2积分。</li>
@@ -39,9 +39,7 @@
 <style lang="scss" scoped>
 	@import '../../style/mixin';
 	
-	#signNote{
-		background-color: $c8;
-		min-height: 100%;
+	#sign-note{
 		.title{
 			line-height: 1.5rem;
 			margin-left: 0.2rem;

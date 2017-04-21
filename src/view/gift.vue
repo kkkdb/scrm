@@ -1,14 +1,14 @@
 <template>
-	<div id="gift">
-		<div class="mainBox">
-			<div class="topHead">
+	<div id="gift" class='content'>
+		<div class="main-box bk-white">
+			<div class="top-head">
 				<div class="txt">
 					<p>尊敬的用户,</p>
 					<p>截止{{date}},您当前年度的剩余积分为<span class="text-pink">{{points}}分</span>。</p>
 					<p>积分有效期至<span class="text-pink">{{year}}-12-31</span>。请根据您的剩余可用积分兑换礼品，请在有效期内申请兑礼。</p>					
 				</div>
 			</div>
-			<div class="giftList">
+			<div class="gift-list">
 				<div class="head"><img src="../images/giftHead.png" alt="积分兑礼"></div>
 				<ul class="list">
 					<li>
@@ -112,16 +112,7 @@
 <style lang="scss" scoped>
 	@import '../style/mixin';
 	
-	#gift{
-		width: 100%;
-		min-height: 100%;
-	}
-	.mainBox{
-		width: 100%;
-		height: 100%;
-		background-color: $c8;
-	}
-	.topHead{
+	.top-head{
 		@include wh(100%, 5.12rem);
 		padding:0.5rem 0.5rem 0;
 		@include font(0.5546rem, 1rem);
@@ -132,7 +123,7 @@
 			border-bottom: 1px solid $c6;
 		}
 	}
-	.giftList{
+	.gift-list{
 		padding: 1.066rem 1.066rem 0 1.706rem;
 
 		.head{

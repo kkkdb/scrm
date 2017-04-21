@@ -1,48 +1,48 @@
 <template>
-	<div id="earnRecord">
-		<div class="swiper-container">
-		    <div class="swiper-wrapper">
-		        <div class="swiper-slide">
-		        	<div class="mainBox">
-						<div class="timeline" @click.prevent.stop='changeTime'>
-							{{time}} <i class="fa fa-caret-down"></i>
-							<input type="hidden" id='picker' v-model='time'>
-						</div>
-						<div class="line"></div>
-						<div class="pointsBox">
+	<div id="earn-record" class='content bk-white'>
+		<div class="main-box">
+			<div class="timeline" @click.prevent.stop='changeTime'>
+				{{time}} <i class="fa fa-caret-down"></i>
+				<input type="hidden" id='picker' v-model='time'>
+			</div>
+			<div class="line"></div>
+			<div class="swiper-container" ref='pointBox'>
+			    <div class="swiper-wrapper">
+			        <div class="swiper-slide">
+						<div class="points-box">
 							<div class='title'>
 								<template v-if='is_now'>本月</template><template v-else>{{month_show}}</template>积分
 							</div>
-				        	<div class='totalPoints'>
-				        		<div class="flex" style="border-right: 1px solid #dedede;">
-					        		<span class='text-pink'>{{earnPoints}}</span> 获取积分
+				        	<div class='total-points'>
+				        		<div class="flex" style="border-right: 1px sodivd #dedede;">
+					        		<span class='earn-span text-pink'>{{earnPoints}}</span> 获取积分
 				        		</div>
 				        		<div class="flex">
-				        			<span class='text-pink'>{{usePoints}}</span> 使用积分
+				        			<span class='use-span text-pink'>{{usePoints}}</span> 使用积分
 				        		</div>
 				        	</div>
 						</div>
-						<div class="line"></div>
-						<div class="navbar">
-							<div class="nav-item" :class="{active: type=='earn'}" @click.prevent='changeItem("earn")'>获取</div>
-							<div class="nav-item" :class="{active: type=='use'}" @click.prevent='changeItem("use")'>使用</div>
-						</div>
-						<div class="line"></div>
-						<div class="list">
-							<ul>
-								<li v-for='item in list'>
-									<div class="way">
-										<p v-text='item.name'></p>
-										<p class='time' v-text='item.time'></p>
-									</div>
-									<div class="num"><template v-if='type=="earn"'>+</template><template v-else>-</template>{{item.num}}</div>
-								</li>
-							</ul>
-						</div>			        		
-		        	</div>
+					</div>
 				</div>
-		    </div>
-		</div>
+			</div>
+			<div class="line"></div>
+			<div class="navbar">
+				<div class="nav-item" :class="{active: type=='earn'}" @click.prevent='changeItem("earn")'>获取</div>
+				<div class="nav-item" :class="{active: type=='use'}" @click.prevent='changeItem("use")'>使用</div>
+			</div>
+			<div class="line"></div>
+			<div class="list">
+				<ul>
+					<li v-for='item in list'>
+						<div class="way">
+							<p v-text='item.name'></p>
+							<p class='time' v-text='item.time'></p>
+						</div>
+						<div class="num"><template v-if='type=="earn"'>+</template><template v-else>-</template>{{item.num}}</div>
+					</li>
+				</ul>
+			</div>			        		
+    	</div>
 	</div>
 </template>
 
@@ -80,35 +80,28 @@
 					_self.hasChange = true;
 				}
 			});
+
 			//初始化swiper
         	new Swiper('.swiper-container', {
-        		onSetTranslate (swiper,translate){
-        			// console.log('偏移量被设置为'+translate);
-        			if (_self.slideBoolean&&Math.abs(translate)>80) {
-        				_self.slideBoolean = false;
-        				$('.mainBox').fadeOut(100,()=>{
-	        				if (translate<0) {
-	        					if(_self.month==12){
-	        						_self.month = 1;
-	        						_self.year = Number(_self.year) + 1;
-	        					}else{
-	        						_self.month = Number(_self.month) + 1;
-	        					}
-	        				}else{
-	        					if(_self.month==1){
-	        						_self.month = 12;
-	        						_self.year = Number(_self.year) - 1;
-	        					}else{
-	        						_self.month = Number(_self.month) - 1;
-	        					}
-	        				}        					
-        				});
-        			}
-				},
-				onTransitionEnd (swiper) {
-					$('.mainBox').fadeIn(100);
-					_self.slideBoolean = true;
-				}
+        		loop: true,
+        		onSlideNextStart(swiper){
+        			if(_self.month==12){
+						_self.month = 1;
+						_self.year = Number(_self.year) + 1;
+					}else{
+						_self.month = Number(_self.month) + 1;
+					}
+					_self.setPoints();
+        		},
+        		onSlidePrevStart(swiper){
+        			if(_self.month==1){
+						_self.month = 12;
+						_self.year = Number(_self.year) - 1;
+					}else{
+						_self.month = Number(_self.month) - 1;
+					}
+					_self.setPoints();
+        		}
 		    });
 		},
 		data() {
@@ -126,11 +119,12 @@
 		created(){
 			let date = new Date();
 			this.year = date.getFullYear();
-			this.month = date.getMonth() + 1;
+			this.month = date.getMonth();
 
 			this.type = 'earn';
 		},
 		computed:{
+			...mapState(['alVue']),
 			year_show(){
 				return this.year + '年'
 			},
@@ -150,6 +144,14 @@
 		},
 		methods: {
 			...mapMutations(['SET_TITLE']),
+			setPoints(){
+				let _self = this;
+				let obj = _self.$refs.pointBox;
+				let title = _self.is_now?'本月积分':(_self.month + '月积分')
+    			$(obj).find('.title').text(title);
+    			$(obj).find('.use-span').text(_self.usePoints);
+    			$(obj).find('.earn-span').text(_self.earnPoints);
+			},
 			async getList(){
 				let list = [{
 					name: '消费积分 (天猫旗舰店)',
@@ -209,6 +211,7 @@
 					//await this.getList();
 					console.log('触发搜索');
 					this.hasChange = false;
+					this.setPoints();
 				}
 			}
 		}
@@ -218,7 +221,7 @@
 <style lang="scss" scoped>
 	@import '../style/mixin';
 
-	#earnRecord{
+	#earn-record{
 		width: 100%;
 		min-height: 100%;
 		background-color: $c8;
@@ -246,7 +249,7 @@
 		line-height: 2.134rem;
 		text-align: center;
 	}
-	.pointsBox{
+	.points-box{
 		height: 3.92534rem;
 		text-align: center;
 		.title{
@@ -254,7 +257,7 @@
 			line-height: 1.75rem;
 			color: $c4;
 		}
-		.totalPoints{
+		.total-points{
 			display: flex;
 			.flex{
 				flex: 1;

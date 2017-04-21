@@ -1,5 +1,5 @@
 <template>
-	<div id="userInfo">
+	<div id="user-info" class='content bk-white'>
 		<div class="weui-cells">
 	        <div class="weui-cell">
 	            <div class="weui-cell__hd">
@@ -85,8 +85,8 @@
 	    </div>
 	    <div class="weui-cells weui-cells-callway">
 	    	<div class="weui-cell">
-	    		<div class="callTxt">希望沟通方式</div>
-	    		<div class="callWays">
+	    		<div class="call-txt">希望沟通方式</div>
+	    		<div class="call-ways">
 	    			<ul>
 	    				<li v-for='item in callWayArr' @click='item.check = !item.check'><i class='check' :class="{checked: item.check}"></i>{{item.label}}</li>
 	    			</ul>
@@ -238,10 +238,6 @@
 <style lang="scss" scoped>
 	@import '../style/mixin';
 	
-	#userInfo{
-		@include wh(100%, 100%);
-		background-color: $c8;
-	}
 	.weui-cells{
 		@include sc(0.64rem, $c3);
 		margin-top: 0;
@@ -259,10 +255,10 @@
 	.weui-cells-callway .weui-cell{
 		height: 3.83872rem;
 	}
-	.callTxt{
+	.call-txt{
 		@include wh(35%, 100%);
 	}
-	.callWays{
+	.call-ways{
 		width: 65%;
 
 		ul li{

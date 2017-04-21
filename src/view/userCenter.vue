@@ -1,11 +1,11 @@
 <template>
-	<div id="userCenter">
-		<div class="mainBody">
-			<div class="headBox">
+	<div id="user-center" class='content'>
+		<div class="main-body">
+			<div class="head-box">
 				<div class="logo">
 					<img src="../images/logo.png" alt="logo">
 				</div>
-				<div class="userInfo">
+				<div class="user-info">
 					<ul>
 						<li>
 							<p class="p1">积分</p>
@@ -22,7 +22,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="bototmBox">
+			<div class="bototm-box">
 				<ul>
 					<router-link :to="{name: 'vipRule'}" tag='li'>
 						<img src="../images/vip.png" alt="会员制度">
@@ -89,15 +89,13 @@
 <style lang="scss" scoped>
 	@import '../style/mixin';
 	
-	#userCenter{
-		@include wh(100%, 100%);
+	#user-center{
 		@include bis('../images/bj.png');
 	}
-	.mainBody{
-		@include wh(100%, 100%);
-		background-color: rgba(255,255,255,0.9);
+	.main-body{
+  		background-color: rgba(255,255,255,0.9);
 	}
-	.headBox{
+	.head-box{
 		@include wh(100%, 30%);
 		border-bottom: 1px solid $c6;
 
@@ -110,7 +108,7 @@
 				height: 2.725rem;
 			}
 		}
-		.userInfo{
+		.user-info{
 			@include wh(100%, 35%);
 			ul li{
 				float: left;
@@ -126,7 +124,7 @@
 			}
 		}
 	}
-	.bototmBox{
+	.bototm-box{
 		@include wh(100%, 70%);
 		ul li{
 			float: left;

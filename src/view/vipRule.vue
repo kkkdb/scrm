@@ -1,9 +1,9 @@
 <template>
-	<div id="vipRule">
-		<div class="mainBody">
+	<div id="vip-rule bk-white" class='content'>
+		<div class="main-body">
 			<div class="block">
 				<div class="title">会员等级</div>
-				<div class="content">
+				<div class="box-content">
 					<ul>
 						<li>1.会员：微信/官网注册/天猫 (提供手机号绑定)</li>
 						<li>2.银卡会员：一年内累计消费满100元</li>
@@ -14,7 +14,7 @@
 			</div>
 			<div class="block">
 				<div class="title">积分规则</div>
-				<div class="content">
+				<div class="box-content">
 					<ul>
 						<li>1.消费积分：消费金额1元=1积分</li>
 						<li>2.活动积分：</li>
@@ -29,7 +29,7 @@
 			</div>
 			<div class="block">
 				<div class="title">有限期</div>
-				<div class="content">
+				<div class="box-content">
 					<ul>
 						<li>1.会员等级永久有效</li>
 						<li>2.积分在自然年一年内有效,本年度累积积分会在当年12月31日后失效</li>
@@ -38,7 +38,7 @@
 			</div>
 			<div class="block">
 				<div class="title">生日权益</div>
-				<div class="content">
+				<div class="box-content">
 					<ul>
 						<li>1.银卡会员生日当月消费金额1元=2积分</li>
 						<li>2.金卡会员生日当月消费金额1元=2积分,生日当天赠送50积分</li>
@@ -48,7 +48,7 @@
 			</div>
 			<div class="block">
 				<div class="title">使用说明</div>
-				<div class="content">
+				<div class="box-content">
 					<ul>
 						<li>1.每人限领一张会员卡</li>
 						<li>2.会员在专柜购买时请出示会员卡或者手机号,在天猫购买时请填写会员对应的手机号,以方便积分,积分将于2个工作日内更新至微信会员卡内</li>
@@ -81,12 +81,8 @@
 
 <style lang="scss" scoped>
 	@import '../style/mixin';
-	
-	#vipRule{
-		width: 100%;
-		background-color: $c8;
-	}
-	.mainBody{
+
+	.main-body{
 		@include wh(100%, 100%);
 		padding: 0.8533rem;
 	}
@@ -96,7 +92,7 @@
 		.title{
 			@include sc(0.64rem, $c3);
 		}
-		.content ul li{
+		.box-content ul li{
 			@include sc(0.5983rem, $c4);
 		}
 	}

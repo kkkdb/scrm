@@ -1,11 +1,11 @@
 <template>
-	<div id="userRights">
-		<div class="mainBody">
-			<div class="topBox">
+	<div id="user-rights" class='content'>
+		<div class="main-body">
+			<div class="top-box">
 				<img src="../../images/yincard.png" alt="银卡会员">
 				<p class='note'>当年还需累积消费<span class='text-pink'>{{points}}元</span>，即可升级为<span class='text-pink'>金卡会员</span>，享受更多权益</p>
 			</div>
-			<div class="bottomBox">
+			<div class="bottom-box">
 				<div class="weui-cells">
 			        <router-link class="weui-cell weui-cell_access" :to="{name: 'earnRecord'}" tag='li'>
 			            <div class="weui-cell__hd">
@@ -57,15 +57,13 @@
 <style lang="scss" scoped>
 	@import '../../style/mixin';
 
-	#userRights{
-		@include wh(100%, 100%);
+	#user-rights{
 		@include bis('../../images/bj.png');
 	}
-	.mainBody{
-		@include wh(100%, 100%);
+	.main-body{
 		background-color: rgba(255,255,255,0.9);
 	}
-	.topBox{
+	.top-box{
 		@include wh(100%, 42%);
 		padding: 0.853rem 0.64rem 0;
 
