@@ -70,7 +70,7 @@ function login() {
                 type: "post",
                 data: {'code':code,'app_id':appId},
                 success (data){
-                	setCookie({"AccessToken":data.data.access_token, "AppId":appId, "OpenId":data.data.open_id, "UserSN":data.data.user_sn});
+                	setCookie({"AccessToken":data.data.access_token, "AppId":appId, "OpenId":data.data.open_id, "userId":data.data.user_id, "userName":data.data.user_name});
                     location.href = removeParamFromUrl(["code"]);
                 }
             })
@@ -80,12 +80,12 @@ function login() {
 
 function checkLoginStatus(callback) {
     callback?callback:"";
-    // if (isWeChatBrowser() || "true" != MasterConfig["is_debug"] && "app_jump" != getUrlParams('source')) {
+    if (isWeChatBrowser() || "true" != MasterConfig["is_debug"] && "app_jump" != getUrlParams('source')) {
         let accessToken = getCookie("AccessToken"),
             AppId = getCookie("AppId"),
             appId = MasterConfig["appId"];
         return "" != accessToken && AppId == appId ? callback() : login()
-    // }
+    }
 }
 
 //获取url上的参
