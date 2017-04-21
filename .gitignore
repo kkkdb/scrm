@@ -1,0 +1,4 @@
+node_modules/
+/.project
+/.gitignore
+/config/master_config.js
