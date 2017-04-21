@@ -10,6 +10,8 @@
 			    <div class="swiper-wrapper">
 			        <div class="swiper-slide">
 						<div class="points-box">
+							<div class="turn-left"><i class="fa fa-caret-left"></i></div>
+							<div class="turn-right"><i class="fa fa-caret-right"></i></div>
 							<div class='title'>
 								<template v-if='is_now'>本月</template><template v-else>{{month_show}}</template>积分
 							</div>
@@ -252,6 +254,15 @@
 	.points-box{
 		height: 3.92534rem;
 		text-align: center;
+		position: relative;
+		.turn-left{
+			@include ct;
+			left: 0.2rem;
+		}
+		.turn-right{
+			@include ct;
+			right: 0.2rem
+		}
 		.title{
 			font-size: 0.5547rem;
 			line-height: 1.75rem;

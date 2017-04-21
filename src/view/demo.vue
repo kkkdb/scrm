@@ -5,10 +5,14 @@
 </template>
 
 <script>
+	import {checkLoginStatus} from '../commom/commom'
 	import {mapState, mapMutations} from 'vuex'
 	export default{
 		mounted() {
 			this.SET_TITLE('会员中心');
+		},
+		created() {
+			// checkLoginStatus();
 		},
 		data() {
 			return{

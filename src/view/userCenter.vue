@@ -67,12 +67,15 @@
 </template>
 
 <script>
-	import {setNum} from '../common/common'
+	import {setNum, checkLoginStatus} from '../common/common'
 	import {mapState, mapMutations} from 'vuex'
 	export default{
 		mounted() {
 			this.SET_TITLE('会员中心');
 			this.points = setNum(2000);
+		},
+		created() {
+			// checkLoginStatus();
 		},
 		data() {
 			return{

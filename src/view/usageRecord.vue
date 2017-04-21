@@ -10,15 +10,17 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="points-box">
+                        	<div class="turn-left"><i class="fa fa-caret-left"></i></div>
+							<div class="turn-right"><i class="fa fa-caret-right"></i></div>
                             <div class='title'>
                                 <template v-if='is_now'>本月</template><template v-else>{{month_show}}</template>积分
                             </div>
                             <div class='total-points'>
                                 <div class="flex" style="border-right: 1px sodivd #dedede;">
-                                    <span class='earn-span text-pink'>{{earnPoints}}</span> 获取积分
+                                    <span class='earn-span text-pink'>{{giftPoints}}</span> 兑礼积分
                                 </div>
                                 <div class="flex">
-                                    <span class='use-span text-pink'>{{usePoints}}</span> 使用积分
+                                    <span class='use-span text-pink'>{{trialPoints}}</span> 试用积分
                                 </div>
                             </div>
                         </div>
@@ -227,8 +229,8 @@
 				month: null,
 				year: null,
 				list: [],
-				earnPoints: null,
-				usePoints: null,
+				giftPoints: null,
+				trialPoints: null,
 				hasChange: false,
 				slideBoolean: true
 			}
@@ -237,8 +239,8 @@
 			let date = new Date();
 			this.year = date.getFullYear();
 			this.month = date.getMonth() + 1;
-			this.earnPoints = setNum(1005);
-			this.usePoints = setNum(3000);
+			this.giftPoints = setNum(1005);
+			this.trialPoints = setNum(3000);
 
 			this.type = 'gift';
 		},
@@ -268,8 +270,8 @@
 				let obj = _self.$refs.pointBox;
 				let title = _self.is_now?'本月积分':(_self.month + '月积分')
     			$(obj).find('.title').text(title);
-    			$(obj).find('.use-span').text(_self.usePoints);
-    			$(obj).find('.earn-span').text(_self.earnPoints);
+    			$(obj).find('.use-span').text(_self.trialPoints);
+    			$(obj).find('.earn-span').text(_self.giftPoints);
 			},
 			changeItem(type){
 				this.type = type;
@@ -321,6 +323,15 @@
 	.points-box{
 		height: 3.92534rem;
 		text-align: center;
+		position: relative;
+		.turn-left{
+			@include ct;
+			left: 0.2rem;
+		}
+		.turn-right{
+			@include ct;
+			right: 0.2rem
+		}
 		.title{
 			font-size: 0.5547rem;
 			line-height: 1.75rem;
