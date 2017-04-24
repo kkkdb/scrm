@@ -10,8 +10,6 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-store.state.alVue = Vue;
-
 new Vue({
     router,
     store,

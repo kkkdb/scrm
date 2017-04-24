@@ -10,8 +10,8 @@
 			    <div class="swiper-wrapper">
 			        <div class="swiper-slide">
 						<div class="points-box">
-							<div class="turn-left"><i class="fa fa-caret-left"></i></div>
-							<div class="turn-right"><i class="fa fa-caret-right"></i></div>
+							<div class="turn-left" @click='prevPage'><i class="fa fa-caret-left"></i></div>
+							<div class="turn-right" @click='nextPage'><i class="fa fa-caret-right"></i></div>
 							<div class='title'>
 								<template v-if='is_now'>本月</template><template v-else>{{month_show}}</template>积分
 							</div>
@@ -57,54 +57,44 @@
 		mounted() {
 			let _self = this;
 			this.SET_TITLE('积分记录');
-			this.getList();
-			$("#picker").picker({
-				title: "选择年月",
-				cols: [
-					{
-						textAlign: 'center',
-						displayValues: ['2016年', '2017年', '2018年'],
-						values: [2016,2017,2018]
+			this.getList().then(()=>{
+				$("#picker").picker({
+					title: "选择年月",
+					cols: [
+						{
+							textAlign: 'center',
+							displayValues: ['2016年', '2017年', '2018年'],
+							values: [2016,2017,2018]
+						},
+						{
+							textAlign: 'center',
+							displayValues: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+							values: [1,2,3,4,5,6,7,8,9,10,11,12]
+						}
+					],
+					onChange(a,b,c){
+						_self.year = b[0];
+						_self.month = b[1];
+						_self.year_show = c[0];
+						_self.month_show = c[1];
 					},
-					{
-						textAlign: 'center',
-						displayValues: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-						values: [1,2,3,4,5,6,7,8,9,10,11,12]
+					onClose(){
+						_self.hasChange = true;
 					}
-				],
-				onChange(a,b,c){
-					_self.year = b[0];
-					_self.month = b[1];
-					_self.year_show = c[0];
-					_self.month_show = c[1];
-				},
-				onClose(){
-					_self.hasChange = true;
-				}
-			});
+				});
 
-			//初始化swiper
-        	new Swiper('.swiper-container', {
-        		loop: true,
-        		onSlideNextStart(swiper){
-        			if(_self.month==12){
-						_self.month = 1;
-						_self.year = Number(_self.year) + 1;
-					}else{
-						_self.month = Number(_self.month) + 1;
-					}
-					_self.setPoints();
-        		},
-        		onSlidePrevStart(swiper){
-        			if(_self.month==1){
-						_self.month = 12;
-						_self.year = Number(_self.year) - 1;
-					}else{
-						_self.month = Number(_self.month) - 1;
-					}
-					_self.setPoints();
-        		}
-		    });
+				//初始化swiper
+	        	new Swiper('.swiper-container', {
+	        		loop: true,
+	        		onSlideNextStart(swiper){
+	        			_self.nextPage();
+	        		},
+	        		onSlidePrevStart(swiper){
+	        			_self.prevPage();
+	        			
+	        		}
+			    });
+			});
 		},
 		data() {
 			return{
@@ -126,7 +116,6 @@
 			this.type = 'earn';
 		},
 		computed:{
-			...mapState(['alVue']),
 			year_show(){
 				return this.year + '年'
 			},
@@ -146,6 +135,26 @@
 		},
 		methods: {
 			...mapMutations(['SET_TITLE']),
+			nextPage(){
+				let _self = this;
+    			if(_self.month==12){
+					_self.month = 1;
+					_self.year = Number(_self.year) + 1;
+				}else{
+					_self.month = Number(_self.month) + 1;
+				}
+				_self.getList();
+			},
+			prevPage(){
+				let _self = this;
+				if(_self.month==1){
+					_self.month = 12;
+					_self.year = Number(_self.year) - 1;
+				}else{
+					_self.month = Number(_self.month) - 1;
+				}
+				_self.getList();
+			},
 			setPoints(){
 				let _self = this;
 				let obj = _self.$refs.pointBox;
@@ -167,9 +176,12 @@
 				list.forEach((item)=>{
 					item.num = setNum(item.num);
 				})
-				this.earnPoints = setNum(1005);
-				this.usePoints = setNum(3000);
+				let num1 = Math.floor(Math.random()*10000);
+				let num2 = Math.floor(Math.random()*10000);
+				this.earnPoints = setNum(num1);
+				this.usePoints = setNum(num2);
 				this.list = list;
+				this.setPoints();
 			},
 			changeItem(_type){
 				this.type = _type;
@@ -210,10 +222,9 @@
 		watch:{
 			hasChange(newVal){
 				if (newVal) {
-					//await this.getList();
+					this.getList();
 					console.log('触发搜索');
 					this.hasChange = false;
-					this.setPoints();
 				}
 			}
 		}
@@ -256,12 +267,14 @@
 		text-align: center;
 		position: relative;
 		.turn-left{
+			width: 5%;
 			@include ct;
-			left: 0.2rem;
+			left: 0;
 		}
 		.turn-right{
+			width: 5%;
 			@include ct;
-			right: 0.2rem
+			right: 0;
 		}
 		.title{
 			font-size: 0.5547rem;

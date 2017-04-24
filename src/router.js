@@ -44,7 +44,7 @@ export default new VueRouter({
             },{
                 name: 'gift',
                 path: '/gift',
-                component: require('./view/gift')                       //积分兑礼
+                component: require('./view/gift/gift')                  //积分兑礼
             },{
                 name: 'formConfirm',
                 path: '/formConfirm/:type',

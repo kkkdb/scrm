@@ -8,7 +8,6 @@ Vue.use(Vuex)
 
 const state = {
 	userInfo: null,
-	points: null,
 	vipLevel: {
 		1: '会员',
 		2: '白银会员',
@@ -24,9 +23,7 @@ const state = {
 	shoppeStatus: {
 		init: '待领用',
 		finished: '已领用'
-	},
-	date: null,
-	laseDate: null
+	}
 }
 
 export default new Vuex.Store({
