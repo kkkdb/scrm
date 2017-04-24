@@ -112,31 +112,31 @@
 		mounted() {
 			this.SET_TITLE('每日签到');
 			let list = [{
-				date: "17",
-				month: "4",
-				hasSign: true,
-			},{
-				date: "18",
+				date: "24",
 				month: "4",
 				hasSign: false,
 			},{
-				date: "19",
+				date: "25",
 				month: "4",
 				hasSign: false,
 			},{
-				date: "20",
+				date: "26",
 				month: "4",
 				hasSign: false,
 			},{
-				date: "21",
+				date: "27",
 				month: "4",
 				hasSign: false,
 			},{
-				date: "22",
+				date: "28",
 				month: "4",
 				hasSign: false,
 			},{
-				date: "23",
+				date: "29",
+				month: "4",
+				hasSign: false,
+			},{
+				date: "30",
 				month: "4",
 				hasSign: false,
 			}];
@@ -207,7 +207,7 @@
 				}
 			}
 			.calendarBox{
-				@include wh(35%, 72%);
+				@include wh(40%, 72%);
 				@include center;
 				text-align: center;
 				position: relative;
@@ -216,8 +216,8 @@
 					font-size: 0.5547rem;
 				}
 				.calendar{
-					width: 80%;
-					margin: 0.512rem 10% 0;
+					width: 70%;
+					margin: 0.512rem 15% 0;
 					position: relative;
 					img{
 						width: 100%;

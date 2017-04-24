@@ -64,7 +64,7 @@
 		background-color: rgba(255,255,255,0.9);
 	}
 	.top-box{
-		@include wh(100%, 42%);
+		width: 100%;
 		padding: 0.853rem 0.64rem 0;
 
 		img{

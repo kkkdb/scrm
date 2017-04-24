@@ -1,3 +1,4 @@
+import MasterConfig from '../../config/master_config'
 /**
  * [设置cookie]
  * @param  {Object}   cookies  [要写入document.cookie中的对象]
@@ -10,7 +11,7 @@ function setCookie(cookies, callback) {
 	now.setTime(expireTime);
 	
 	for (let key in cookies) {
-		document.cookie = key + '=' + cookies[key] + ';expires=' + now.toGMTString() + ';path=/;domain=' + domain;
+		document.cookie = key + '=' + cookies[key] + ';expires=' + now.toGMTString() + ';path=/;domain=' + MasterConfig.domainUrl;
 	}
 
 	callback();
@@ -52,7 +53,7 @@ function deleteCookie(callback) {
 		var cookie = cookies[i];
 		var eqPos = cookie.indexOf("=");
 		var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-		document.cookie = name + "=;domain="+domain+";expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		document.cookie = name + "=;domain="+MasterConfig.domainUrl+";expires=Thu, 01 Jan 1970 00:00:00 GMT";
 	}
 
 	callback();

@@ -2,7 +2,6 @@ import MasterConfig from '../../config/master_config'
 import {getCookie, setCookie} from './cookie'
 export {setNum, getDateStr, checkLoginStatus} 
 
-
 function setNum(num){
 	let price = num + '',
 	integer = price.split('.')[0],
@@ -52,8 +51,7 @@ function isWeChatBrowser() {
 }
 
 function getApi(url) {
-    let port = parseInt(getCookie("BackendPort"));
-    return (port ? ":" + port : "") + "/" + url + "&app_id=" + MasterConfig["appId"] + "&payment_app_id=" + MasterConfig["appId"] + "&provider=WECHAT"
+    return "/" + url + "&app_id=" + MasterConfig["appId"] + "&payment_app_id=" + MasterConfig["appId"] + "&provider=WECHAT"
 }
 
 function login() {
