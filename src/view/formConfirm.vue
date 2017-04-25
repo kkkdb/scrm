@@ -1,5 +1,5 @@
 <template>
-	<div id="formConfirm">
+	<div id="form-confirm" class='content bk-white'>
 		<div class="weui-cells">
 	        <div class="weui-cell">
 	            <div class="weui-cell__hd" style="width: 70%;">
@@ -120,11 +120,6 @@
 
 <style lang="scss" scoped>
 	@import '../style/mixin';
-	#formConfirm{
-		width: 100%;
-		height: 100%;
-		background-color: $c8;
-	}
 	.weui-cells {
 	    font-size: 0.64rem;
 	    color: $c3;

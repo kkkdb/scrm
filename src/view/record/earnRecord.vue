@@ -1,33 +1,7 @@
 <template>
 	<div id="earn-record" class='content bk-white'>
 		<div class="main-box">
-			<div class="timeline" @click.prevent.stop='changeTime'>
-				{{time}} <i class="fa fa-caret-down"></i>
-				<input type="hidden" id='picker' v-model='time'>
-			</div>
-			<div class="line"></div>
-			<div class="swiper-container" ref='pointBox'>
-			    <div class="swiper-wrapper">
-			        <div class="swiper-slide">
-						<div class="points-box">
-							<div class="turn-left"><i class="fa fa-caret-left"></i></div>
-							<div class="turn-right"><i class="fa fa-caret-right"></i></div>
-							<div class='title'>
-								<template v-if='is_now'>本月</template><template v-else>{{month_show}}</template>积分
-							</div>
-				        	<div class='total-points'>
-				        		<div class="flex" style="border-right: 1px sodivd #dedede;">
-					        		<span class='earn-span text-pink'>{{earnPoints}}</span> 获取积分
-				        		</div>
-				        		<div class="flex">
-				        			<span class='use-span text-pink'>{{usePoints}}</span> 使用积分
-				        		</div>
-				        	</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="line"></div>
+			<select-time ref='pointBox' :time='time' :month_show='month_show' :type='type' :is_now='is_now' :earn-points='earnPoints' :use-points='usePoints'></select-time>
 			<div class="navbar">
 				<div class="nav-item" :class="{active: type=='earn'}" @click.prevent='changeItem("earn")'>获取</div>
 				<div class="nav-item" :class="{active: type=='use'}" @click.prevent='changeItem("use")'>使用</div>
@@ -49,83 +23,36 @@
 </template>
 
 <script>
-	import {setNum} from '../common/common'
+	import {setNum} from '../../common/common'
+	import selectTime from './children/selectTime'
 	import {mapState, mapMutations} from 'vuex'
-	import 'src/plugins/swiper.min.js'
-	import 'src/style/swiper.min.css'
 	export default{
 		mounted() {
 			let _self = this;
 			this.SET_TITLE('积分记录');
 			this.getList();
-			$("#picker").picker({
-				title: "选择年月",
-				cols: [
-					{
-						textAlign: 'center',
-						displayValues: ['2016年', '2017年', '2018年'],
-						values: [2016,2017,2018]
-					},
-					{
-						textAlign: 'center',
-						displayValues: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-						values: [1,2,3,4,5,6,7,8,9,10,11,12]
-					}
-				],
-				onChange(a,b,c){
-					_self.year = b[0];
-					_self.month = b[1];
-					_self.year_show = c[0];
-					_self.month_show = c[1];
-				},
-				onClose(){
-					_self.hasChange = true;
-				}
-			});
-
-			//初始化swiper
-        	new Swiper('.swiper-container', {
-        		loop: true,
-        		onSlideNextStart(swiper){
-        			if(_self.month==12){
-						_self.month = 1;
-						_self.year = Number(_self.year) + 1;
-					}else{
-						_self.month = Number(_self.month) + 1;
-					}
-					_self.getList();
-        		},
-        		onSlidePrevStart(swiper){
-        			if(_self.month==1){
-						_self.month = 12;
-						_self.year = Number(_self.year) - 1;
-					}else{
-						_self.month = Number(_self.month) - 1;
-					}
-					_self.getList();
-        		}
-		    });
+		},
+		components:{
+			selectTime
 		},
 		data() {
 			return{
 				type: null,
-				month: null,
-				year: null,
 				list: [],
 				earnPoints: null,
 				usePoints: null,
-				hasChange: false,
 				slideBoolean: true
 			}
 		},
 		created(){
 			let date = new Date();
-			this.year = date.getFullYear();
-			this.month = date.getMonth();
+			this.SET_TIME({type:'year', date: date.getFullYear()});
+			this.SET_TIME({type:'month', date: date.getMonth()});
 
 			this.type = 'earn';
 		},
 		computed:{
+			...mapState(['month', 'year']),
 			year_show(){
 				return this.year + '年'
 			},
@@ -144,10 +71,10 @@
 			}
 		},
 		methods: {
-			...mapMutations(['SET_TITLE']),
+			...mapMutations(['SET_TITLE','SET_TIME']),
 			setPoints(){
 				let _self = this;
-				let obj = _self.$refs.pointBox;
+				let obj = _self.$refs.pointBox.$refs.swiperBox;
 				let title = _self.is_now?'本月积分':(_self.month + '月积分')
     			$(obj).find('.title').text(title);
     			$(obj).find('.use-span').text(_self.usePoints);
@@ -173,7 +100,7 @@
 				this.list = list;
 				this.setPoints();
 			},
-			changeItem(_type){
+			async changeItem(_type){
 				this.type = _type;
 				let list = [];
 				if (_type == 'earn') {
@@ -201,20 +128,13 @@
 					item.num = setNum(item.num);
 				})
 				this.list = list;
-			},
-			changeTime(){
-				var _self = this;
-				$('#picker').trigger('click');
-				$("#picker").picker("setValue", [_self.year,_self.month]);
 			}
 
 		},
 		watch:{
-			hasChange(newVal){
-				if (newVal) {
+			month(newVal, oldval){
+				if (newVal!=oldval) {
 					this.getList();
-					console.log('触发搜索');
-					this.hasChange = false;
 				}
 			}
 		}
@@ -222,13 +142,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '../style/mixin';
-
-	#earn-record{
-		width: 100%;
-		min-height: 100%;
-		background-color: $c8;
-	}
+	@import '../../style/mixin';
 
 	.navbar{
 		display: flex;
@@ -243,43 +157,6 @@
 			&.active{
 				color: $c1;
 				border-bottom: 2px solid $c1;
-			}
-		}
-	}
-	.timeline{
-		font-size: 0.64rem;
-		height: 2.134rem;
-		line-height: 2.134rem;
-		text-align: center;
-	}
-	.points-box{
-		height: 3.92534rem;
-		text-align: center;
-		position: relative;
-		.turn-left{
-			width: 5%;
-			@include ct;
-			left: 0;
-		}
-		.turn-right{
-			width: 5%;
-			@include ct;
-			right: 0;
-		}
-		.title{
-			font-size: 0.5547rem;
-			line-height: 1.75rem;
-			color: $c4;
-		}
-		.total-points{
-			display: flex;
-			.flex{
-				flex: 1;
-				text-align: center;
-				font-size: 0.5547rem;
-				span{
-					font-size: 0.8534rem;
-				}
 			}
 		}
 	}

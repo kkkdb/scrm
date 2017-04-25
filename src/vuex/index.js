@@ -23,7 +23,9 @@ const state = {
 	shoppeStatus: {
 		init: '待领用',
 		finished: '已领用'
-	}
+	},
+	month: null,
+	year: null,
 }
 
 export default new Vuex.Store({

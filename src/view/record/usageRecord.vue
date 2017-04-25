@@ -1,32 +1,7 @@
 <template>
     <div id="usage-record" class='content bk-white'>
         <div class="main-box">
-            <div class="timeline" @click.prevent.stop='changeTime'>
-                {{time}} <i class="fa fa-caret-down"></i>
-                <input type="hidden" id='picker' v-model='time'>
-            </div>
-            <div class="line"></div>
-            <div class="swiper-container" ref='pointBox'>
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="points-box">
-                        	<div class="turn-left"><i class="fa fa-caret-left"></i></div>
-							<div class="turn-right"><i class="fa fa-caret-right"></i></div>
-                            <div class='title'>
-                                <template v-if='is_now'>本月</template><template v-else>{{month_show}}</template>积分
-                            </div>
-                            <div class='total-points'>
-                                <div class="flex" style="border-right: 1px sodivd #dedede;">
-                                    <span class='earn-span text-pink'>{{giftPoints}}</span> 兑礼积分
-                                </div>
-                                <div class="flex">
-                                    <span class='use-span text-pink'>{{trialPoints}}</span> 试用积分
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        	<select-time ref='pointBox' :time='time' :month_show='month_show' :type='type' :is_now='is_now' :gift-points='giftPoints' :trial-points='trialPoints'></select-time>
             <div class="line"></div>
             <div class="navbar">
                 <div class="nav-item" :class="{active: type=='gift'}" @click.prevent='changeItem("gift")'>兑礼</div>
@@ -37,7 +12,7 @@
                 <ul>
                     <li>
                         <div class="img-content left">
-                            <img src="../images/1.jpg">
+                            <img src="../../images/1.jpg">
                         </div>
                         <div class="txt-content">
                             <p class="txt-top">帝皇蜂姿修复蜜润柔肤水30ml</p>
@@ -55,7 +30,7 @@
                     </li>
                     <li>
                         <div class="img-content left">
-                            <img src="../images/2.jpg">
+                            <img src="../../images/2.jpg">
                         </div>
                         <div class="txt-content">
                             <p class="txt-top">幻彩流星蜜粉饼</p>
@@ -73,7 +48,7 @@
                     </li>
                     <li>
                         <div class="img-content left">
-                            <img src="../images/3.jpg">
+                            <img src="../../images/3.jpg">
                         </div>
                         <div class="txt-content">
                             <p class="txt-top">幻彩流星亮肤修颜液</p>
@@ -91,7 +66,7 @@
                     </li>
                     <li>
                         <div class="img-content left">
-                            <img src="../images/4.jpg">
+                            <img src="../../images/4.jpg">
                         </div>
                         <div class="txt-content">
                             <p class="txt-top">小黑裙淡香水30ml</p>
@@ -109,7 +84,7 @@
                     </li>
                     <li>
                         <div class="img-content left">
-                            <img src="../images/4.jpg">
+                            <img src="../../images/4.jpg">
                         </div>
                         <div class="txt-content">
                             <p class="txt-top">小黑裙淡香水30ml</p>
@@ -127,7 +102,7 @@
                     </li>
                     <li>
                         <div class="img-content left">
-                            <img src="../images/4.jpg">
+                            <img src="../../images/4.jpg">
                         </div>
                         <div class="txt-content">
                             <p class="txt-top">小黑裙淡香水30ml</p>
@@ -145,7 +120,7 @@
                     </li>
                     <li>
                         <div class="img-content left">
-                            <img src="../images/4.jpg">
+                            <img src="../../images/4.jpg">
                         </div>
                         <div class="txt-content">
                             <p class="txt-top">小黑裙淡香水30ml</p>
@@ -168,84 +143,37 @@
 </template>
 
 <script>
-	import {setNum} from '../common/common'
+	import {setNum} from '../../common/common'
+	import selectTime from './children/selectTime'
 	import {mapState, mapMutations} from 'vuex'
 	import 'src/plugins/swiper.min.js'
 	import 'src/style/swiper.min.css'
 	export default{
 		mounted() {
 			this.SET_TITLE('兑礼及试用记录');
-			let _self = this;
-			$("#picker").picker({
-				title: "选择年月",
-				cols: [
-					{
-						textAlign: 'center',
-						displayValues: ['2016年', '2017年', '2018年'],
-						values: [2016,2017,2018]
-					},
-					{
-						textAlign: 'center',
-						displayValues: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-						values: [1,2,3,4,5,6,7,8,9,10,11,12]
-					}
-				],
-				onChange(a,b,c){
-					_self.year = b[0];
-					_self.month = b[1];
-					_self.year_show = c[0];
-					_self.month_show = c[1];
-				},
-				onClose(){
-					_self.hasChange = true;
-				}
-			});
-			//初始化swiper
-        	new Swiper('.swiper-container', {
-        		loop: true,
-        		onSlideNextStart(swiper){
-        			if(_self.month==12){
-						_self.month = 1;
-						_self.year = Number(_self.year) + 1;
-					}else{
-						_self.month = Number(_self.month) + 1;
-					}
-					_self.setPoints();
-        		},
-        		onSlidePrevStart(swiper){
-        			if(_self.month==1){
-						_self.month = 12;
-						_self.year = Number(_self.year) - 1;
-					}else{
-						_self.month = Number(_self.month) - 1;
-					}
-					_self.setPoints();
-        		}
-		    });
+			this.getList();
+		},
+		components: {
+			selectTime
 		},
 		data() {
 			return{
 				type: null,
-				month: null,
-				year: null,
 				list: [],
 				giftPoints: null,
 				trialPoints: null,
-				hasChange: false,
 				slideBoolean: true
 			}
 		},
 		created(){
 			let date = new Date();
-			this.year = date.getFullYear();
-			this.month = date.getMonth() + 1;
-			this.giftPoints = setNum(1005);
-			this.trialPoints = setNum(3000);
+			this.SET_TIME({type:'year', date: date.getFullYear()});
+			this.SET_TIME({type:'month', date: date.getMonth()});
 
 			this.type = 'gift';
 		},
 		computed:{
-			...mapState(['shippingStatus','shoppeStatus']),
+			...mapState(['shippingStatus','shoppeStatus','month', 'year']),
 			year_show(){
 				return this.year + '年'
 			},
@@ -264,31 +192,31 @@
 			}
 		},
 		methods: {
-			...mapMutations(['SET_TITLE']),
+			...mapMutations(['SET_TITLE','SET_TIME']),
 			setPoints(){
 				let _self = this;
-				let obj = _self.$refs.pointBox;
+				let obj = _self.$refs.pointBox.$refs.swiperBox;
 				let title = _self.is_now?'本月积分':(_self.month + '月积分')
     			$(obj).find('.title').text(title);
     			$(obj).find('.use-span').text(_self.trialPoints);
     			$(obj).find('.earn-span').text(_self.giftPoints);
 			},
+			async getList(){
+				let num1 = Math.floor(Math.random()*10000);
+				let num2 = Math.floor(Math.random()*10000);
+				this.giftPoints = setNum(num1);
+				this.trialPoints = setNum(num2);
+
+				this.setPoints();
+			},
 			changeItem(type){
 				this.type = type;
-			},
-			changeTime(){
-				var _self = this;
-				$('#picker').trigger('click');
-				$("#picker").picker("setValue", [_self.year,_self.month]);
 			}
 		},
 		watch:{
-			hasChange(newVal){
-				if (newVal) {
-					//await this.getList();
-					console.log('触发搜索');
-					this.hasChange = false;
-					this.setPoints();
+			month(newVal, oldval){
+				if (newVal!==oldval) {
+					this.getList();
 				}
 			}
 		}
@@ -296,7 +224,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '../style/mixin';
+	@import '../../style/mixin';
 	
 	.navbar{
 		display: flex;

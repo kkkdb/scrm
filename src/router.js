@@ -52,7 +52,7 @@ export default new VueRouter({
             },{
                 name: 'usageRecord',
                 path: '/usageRecord',
-                component: require('./view/usageRecord')                //兑礼及试用记录
+                component: require('./view/record/usageRecord')                //兑礼及试用记录
             },{
                 name: 'trial',
                 path: '/trial',
@@ -60,7 +60,7 @@ export default new VueRouter({
             },{
                 name: 'earnRecord',
                 path: '/earnRecord',
-                component: require('./view/earnRecord')                 //获取积分记录
+                component: require('./view/record/earnRecord')                 //获取积分记录
             },{
                 name: 'signBoard',
                 path: '/signBoard',
