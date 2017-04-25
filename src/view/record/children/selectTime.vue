@@ -41,9 +41,9 @@
 </template>
 
 <script>
-	import {mapState, mapMutations} from 'vuex'
-	import 'src/plugins/swiper.min.js'
-	import 'src/style/swiper.min.css'
+	import {mapState, mapMutations} from 'vuex';
+	import 'src/plugins/swiper.min.js';
+	import 'src/style/swiper.min.css';
 	export default{
 		props: ['time','month_show','is_now','earnPoints','usePoints','giftPoints','trialPoints','type'],
 		data () {
@@ -110,6 +110,8 @@
 
 <style lang="scss" scoped>
 	@import '../../../style/mixin';
+	@import url(http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css);
+	
 	.timeline{
 		font-size: 0.64rem;
 		height: 2.134rem;

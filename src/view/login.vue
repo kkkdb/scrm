@@ -1,13 +1,13 @@
 <template>
-	<div id='loginContainer'>
-		<div class="mainBody">
-			<div class="loginForm">
+	<div id='login-container'>
+		<div class="main-body">
+			<div class="login-form">
 				<div class="logo">
 					<img src="../images/logo.png" alt="logo">					
 				</div>
-				<p class="tipTxt">请输入以下信息，提交确认会员身份：</p>
+				<p class="tip-txt">请输入以下信息，提交确认会员身份：</p>
 				<div class="phone">
-					<div class="inputBox clear">
+					<div class="input-box clear">
 						<i class="icon left">
 							<img src="../images/phone.png">
 						</i>
@@ -15,21 +15,21 @@
 					</div>
 				</div>
 				<div class="code clear">
-					<div class="inputBox left">
+					<div class="input-box left">
 						<i class="icon left">
 							<img src="../images/code.png">
 						</i>
-						<input type="text" class="codeInput left" placeholder="请输入验证码" maxlength="6" v-model='code'>
+						<input type="text" class="code-input left" placeholder="请输入验证码" maxlength="6" v-model='code'>
 					</div>					
 					<button class='right' :class="{'btn-primary': rightPhoneNumber, 'btn-default': !rightPhoneNumber}" v-show='!computedTime' @click='getVerifyCode'>获取验证码</button>
 					<button class="right btn-default" v-show='computedTime'>已发送({{computedTime}}s)</button>
 				</div>
-				<div class="sexSelect">
+				<div class="sex-select">
 					您的性别
 					<button class="btn-sm sex-item" :class="{'btn-primary': sex=='famale','btn-default': sex!='famale'}" @click='setSex("famale")'>女</button>
 					<button class="btn-sm sex-item" :class="{'btn-primary': sex=='male','btn-default': sex!='male'}" @click='setSex("male")'>男</button>
 				</div>
-				<div class="bottomBox">
+				<div class="bottom-box">
 					<p class='agree' @click='agree=!agree'><i class='check' :class='{checked: agree}'></i>我要注册会员并同意"XXXX关于隐私的声明"</p>
 					<button class="btn-primary btn-block" @click='mobileRegion'>确定</button>
 				</div>
@@ -48,7 +48,7 @@
 
 				sex: 'famale',
 				agree: true,
-				phone_number: '', //电话号码
+				phone_number: '15899999999', //电话号码
 				code: '', //短信验证码
 				validate_token: '', //获取短信时返回的验证值，登录时需要
 				userInfo: '', //用户信息
@@ -80,14 +80,13 @@
                             clearInterval(this.timer)
                         }
                     }, 1000)
-                    //发送短信验证码
-                    let res = await mobileCode(this.phone_number);
+                    let res = await mobileCode(this.phone_number+'');
                     if (res.message) {
                     	$.alert(res.message);
                         return
                     }
                     this.validate_token = res.validate_token;
-                    $(".codeInput").focus();
+                    $(".code-input").focus();
                 }
             },
             async mobileRegion () {
@@ -123,17 +122,17 @@
 <style lang="scss" scoped>
 	@import '../style/mixin';
 
-	#loginContainer{
+	#login-container{
 		@include wh(100%, 100%);
 		@include bis('../images/bj.png');
 		position: relative;
 	}
-	.mainBody{
+	.main-body{
 		@include wh(80%, 70%);
 		@include center;
 		background-color: rgba(255,255,255,0.9);
 	}
-	.loginForm{
+	.login-form{
 		@include wh(80%, 87%);
 		@include center;
 		position: relative;
@@ -146,11 +145,11 @@
 				height: 100%;
 			}
 		}
-		.tipTxt{
+		.tip-txt{
 			margin: 1.152rem 0 0.84rem 0;
 			@include sc(0.5rem, $c4);
 		}
-		.inputBox{
+		.input-box{
 			@include wh(100%, 1.5rem);
 			border: 1px solid $c6;
 			@include borderRadius(4px);
@@ -164,7 +163,7 @@
 					@include center;
 				}
 			}
-			.codeInput{
+			.code-input{
 				@include wh(70%, 100%);
 			}
 			.phoneInput{
@@ -174,10 +173,10 @@
 		.code{
 			margin: 0.84rem 0;
 		}
-		.code .inputBox{
+		.code .input-box{
 			width: 63%;
 		}
-		.sexSelect{
+		.sex-select{
 			@include wh(100%, 1.1rem);
 			@include font(0.64rem, 1.1rem);
 
@@ -185,7 +184,7 @@
 				margin-left: 0.4267rem;
 			}
 		}
-		.bottomBox{
+		.bottom-box{
 			position: absolute;
 			bottom: 0;
 			width: 100%;

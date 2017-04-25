@@ -18,13 +18,9 @@ import fetch from '../config/fetch'
 	// 	type: 'sms'
 	// });
 
-	let mobileCode = () => {
-		return {
-			code: 0,
-			message: '',
-			validate_token: 123456
-		}
-	}
+	var mobileCode = phone => fetch('POST', '/v1/vcode', {
+		mobile: phone
+	})
 
 	let mobileRegion = () => {
 		return {

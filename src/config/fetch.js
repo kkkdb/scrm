@@ -32,7 +32,7 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
 
 		if (type == 'POST') {
 			Object.defineProperty(requestConfig, 'body', {
-				value: data
+				value: JSON.stringify(data)
 			})
 		}
 		
@@ -53,7 +53,7 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
 
 		let sendData = '';
 		if (type == 'POST') {
-			sendData = data;
+			sendData = JSON.stringify(data);
 		}
 
 		requestObj.open(type, url, true);

@@ -14,7 +14,7 @@ if (process.env.NODE_ENV == 'development') {
 	baseUrl = '';
 	routerMode = 'hash'
 }else{
-	baseUrl = 'https://mainsite-restapi.ele.me';
+	baseUrl = 'http://testmpsapi.lepeen.com';
 	routerMode = 'hash'
 }
 
