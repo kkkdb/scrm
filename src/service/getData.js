@@ -18,11 +18,16 @@ import fetch from '../config/fetch'
 	// 	type: 'sms'
 	// });
 
-	var mobileCode = phone => fetch('POST', '/v1/vcode', {
+	let mobileCode = phone => fetch('POST', '/v1/vcode', {
 		mobile: phone
 	})
 
-	let mobileRegion = () => {
+	let mobileCodeVerify = (phone, vcode) => fetch('POST', '/v1/vcode/verify',{
+		mobile: phone,
+		vcode
+	})
+
+	let mobileLogin = () => {
 		return {
 			code: 0,
 			message: '',
@@ -37,4 +42,4 @@ import fetch from '../config/fetch'
 		version: '1.0.0',
 	});
 
-export{getUser, mobileCode, mobileRegion, payRequest}
+export{getUser, mobileCode, mobileCodeVerify, mobileLogin, payRequest}

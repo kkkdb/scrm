@@ -31,7 +31,7 @@
 				</div>
 				<div class="bottom-box">
 					<p class='agree' @click='agree=!agree'><i class='check' :class='{checked: agree}'></i>我要注册会员并同意"XXXX关于隐私的声明"</p>
-					<button class="btn-primary btn-block" @click='mobileRegion'>确定</button>
+					<button class="btn-primary btn-block" @click='mobileLogin'>确定</button>
 				</div>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 
 <script>
 	import {mapState, mapMutations} from 'vuex'
-	import {mobileCode, mobileRegion} from '../service/getData'
+	import {mobileCode, mobileCodeVerify, mobileLogin} from '../service/getData'
 	export default{
 		data () {
 			return {
@@ -89,7 +89,7 @@
                     $(".code-input").focus();
                 }
             },
-            async mobileRegion () {
+            async mobileLogin () {
         		if (!this.rightPhoneNumber) {
         			$.alert('手机号码不正确');
                     return
@@ -102,8 +102,14 @@
                 	$.alert('您还没有同意隐私声明');
                     return
                 }
+                let verify = await mobileCodeVerify(this.phone_number, this.code);
+                if (verify.message) {
+                	$.alert(verify.message);
+                    return
+                }
+                
                 //注册会员
-                let res = await mobileRegion(this.phone_number, this.code, this.sex);
+                let res = await mobileLogin(this.phone_number, this.code, this.sex);
                 if (res.message) {
                 	$.alert(res.message);
                     return
